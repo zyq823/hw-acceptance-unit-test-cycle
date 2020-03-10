@@ -23,3 +23,8 @@ Then /I should see all the movies/ do
     step %{I should see "#{movie.title}"}
   end
 end
+
+Then(/^the director of "([^"]*)" should be "([^"]*)"$/) do |movie_returned, movie_requested|
+  # ensure that only movies with the specified director are listed 
+  expect(Movie.find_by(title: movie_returned).director).to eq(movie_requested)
+end
